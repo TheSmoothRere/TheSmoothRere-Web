@@ -14,42 +14,48 @@ export function ContactForm() {
   const [messageLength, setMessageLength] = useState(0);
 
   async function handleAction(formData: FormData) {
-      setIsPending(true);
+    setIsPending(true);
 
-      const data = {
-        name: formData.get("name"),
-        email: formData.get("email"),
-        subject: formData.get("subject"),
-        message: formData.get("message"),
-      };
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
 
-      try {
-        const response = await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
-        const result = (await response.json()) as { message?: string; error?: string };
+      const result = (await response.json()) as { message?: string; error?: string };
 
-        if (response.ok) {
-          toast.success(result.message || "Thank you! Your inquiry has been sent.");
-          formRef.current?.reset();
-          setMessageLength(0);
-        } else {
-          toast.error(result.error || "Something went wrong.");
-        }
-      } catch (error) {
-        console.error("Submission error:", error);
-        toast.error("Failed to send message. Please try again later.");
-      } finally {
-        setIsPending(false);
+      if (response.ok) {
+        toast.success(result.message || "Thank you! Your inquiry has been sent.");
+        formRef.current?.reset();
+        setMessageLength(0);
+      } else {
+        toast.error(result.error || "Something went wrong.");
       }
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsPending(false);
     }
+  }
 
-    return (
-      <form ref={formRef} action={handleAction} className="space-y-6">
-
+  return (
+    <form 
+      ref={formRef} 
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleAction(new FormData(e.currentTarget));
+      }} 
+      className="space-y-6"
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="name">Name</Label>
