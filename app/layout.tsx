@@ -59,6 +59,7 @@ export const metadata: Metadata = {
 
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
   children,
@@ -74,6 +75,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Toaster position="top-right" />
       </body>
     </html>
   );

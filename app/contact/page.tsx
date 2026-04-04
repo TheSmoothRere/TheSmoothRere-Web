@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,15 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { CodeIcon } from "@hugeicons/core-free-icons";
 import Link from "next/link";
 import { Metadata } from "next";
 import { CONTACT_LINKS, SERVICES } from "@/lib/constants";
+import { ContactForm } from "@/components/contact-form";
 
 export const metadata: Metadata = {
   title: "Contact & Services",
@@ -27,6 +24,7 @@ export default function ContactPage() {
   return (
     <div className="relative min-h-screen bg-background/50">
       <div className="container max-w-7xl mx-auto py-12 px-4 lg:py-20">
+        {/* ... (rest of the header remains the same) */}
         <div className="flex flex-col gap-4 mb-16">
           <Badge variant="outline" className="w-fit px-3 py-1 text-xs">
             Available for Commissions
@@ -98,50 +96,7 @@ export default function ContactPage() {
               <h2 className="font-heading text-2xl font-bold mb-6">
                 Send a Message
               </h2>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                      id="name"
-                      placeholder="John Doe"
-                      className="bg-background/50 border-border/50 focus:border-primary/50"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="john@example.com"
-                      className="bg-background/50 border-border/50 focus:border-primary/50"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input
-                    id="subject"
-                    placeholder="Commission Inquiry: Custom Discord Bot"
-                    className="bg-background/50 border-border/50 focus:border-primary/50"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Tell me about your project..."
-                    className="min-h-[150px] bg-background/50 border-border/50 focus:border-primary/50 resize-none"
-                  />
-                </div>
-                <Button className="w-full md:w-auto h-11 px-8 rounded-full shadow-lg shadow-primary/20">
-                  Submit Inquiry
-                </Button>
-                <p className="text-xs text-muted-foreground text-center md:text-left">
-                  This form is currently for demo purposes. Please use the
-                  direct links on the right to contact me.
-                </p>
-              </form>
+              <ContactForm />
             </section>
           </div>
 
