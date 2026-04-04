@@ -18,11 +18,43 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://thesmoothrere-web.thesmoothrere.workers.dev"),
   title: {
-    default: "TheSmoothRere",
+    default: "TheSmoothRere | Professional Space & Personal Branding",
     template: "%s | TheSmoothRere",
   },
-  description: "Software Engineer and Backend Developer specialized in Java, Spring Boot, and custom backend solutions.",
+  description: "The professional digital space of TheSmoothRere. Software Engineer and Backend Developer sharing insights on Java, Spring Boot, and modern backend engineering.",
+  keywords: ["TheSmoothRere", "Raehan Damai Putra", "Software Engineer", "Backend Developer", "Java", "Spring Boot", "Personal Branding", "Technical Writing", "Backend Engineering"],
+  authors: [{ name: "Raehan Damai Putra" }],
+  creator: "TheSmoothRere",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://thesmoothrere-web.thesmoothrere.workers.dev",
+    siteName: "TheSmoothRere",
+    title: "TheSmoothRere | Professional Space & Personal Branding",
+    description: "The professional digital space of TheSmoothRere. Insights into backend engineering and software development.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TheSmoothRere | Professional Space & Personal Branding",
+    description: "The professional digital space of TheSmoothRere. Insights into backend engineering and software development.",
+    creator: "@thesmoothrere",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 import { Header } from "@/components/header";

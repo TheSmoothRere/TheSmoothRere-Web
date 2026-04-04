@@ -9,6 +9,12 @@ import {
 } from "@/components/ui/empty";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Search01Icon } from "@hugeicons/core-free-icons";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description: "A showcase of my open-source work, backend services, and contributions to the developer community.",
+};
 
 export default async function ProjectsPage() {
   const repos = await getRepos();

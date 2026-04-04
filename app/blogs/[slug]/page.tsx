@@ -15,15 +15,29 @@ interface BlogPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: BlogPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  
+
   if (!post) return {};
 
   return {
     title: post.title,
     description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: "article",
+      publishedTime: post.date,
+      authors: ["TheSmoothRere", "Raehan Damai Putra"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+    },
   };
 }
 

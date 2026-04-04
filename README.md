@@ -2,12 +2,13 @@
 
 ![Commissions](https://img.shields.io/badge/Commissions-Open-brightgreen)
 
-Personal portfolio and blog website built with Next.js 16, React 19, and Tailwind CSS 4.
+Personal branding website and professional space for TheSmoothRere, built with Next.js 16, React 19, and Tailwind CSS 4.
 
 ## 🚀 Features
 
-- **Portfolio**: Showcases GitHub repositories directly from the GitHub API.
-- **Blog**: A space for sharing thoughts on backend engineering, Java development, and more (currently mocked, ready for MDX/CMS integration).
+- **Personal Branding**: A professional digital identity and space for TheSmoothRere.
+- **Project Showcase**: Displays open-source contributions and technical explorations.
+- **Blog**: Insights on backend engineering, Java development, and software architecture.
 - **Modern Tech Stack**: Built with the latest versions of Next.js, React, and Tailwind CSS.
 - **Responsive Design**: Fully responsive and optimized for all screen sizes.
 - **Dark/Light Mode**: Styled with a clean, modern aesthetic.
@@ -46,7 +47,7 @@ Personal portfolio and blog website built with Next.js 16, React 19, and Tailwin
    pnpm dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [Live Page](https://thesmoothrere-web.thesmoothrere.workers.dev) in your browser.
 
 ## 🏗️ Project Structure
 
@@ -57,4 +58,4 @@ Personal portfolio and blog website built with Next.js 16, React 19, and Tailwin
 
 ## 📄 License
 
-This project is open-source. Feel free to use it as a reference for your own portfolio!
+This project is open-source. Feel free to use it as a reference!

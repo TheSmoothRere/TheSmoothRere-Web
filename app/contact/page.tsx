@@ -22,6 +22,13 @@ import {
   GlobalIcon,
 } from "@hugeicons/core-free-icons";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact & Services",
+  description:
+    "Get in touch for custom Discord bots, backend services, and fullstack applications. Available for commissions and collaboration.",
+};
 
 export default function ContactPage() {
   const services = [

@@ -9,6 +9,12 @@ import {
 } from "@/components/ui/empty";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Note01Icon } from "@hugeicons/core-free-icons";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Sharing my thoughts on backend engineering, Java development, and my journey as a developer.",
+};
 
 export default async function BlogPage() {
   const posts = await getPosts();
