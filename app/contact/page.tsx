@@ -12,17 +12,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { HugeiconsIcon } from "@hugeicons/react";
-import {
-  DiscordIcon,
-  GithubIcon,
-  Mail01Icon,
-  TelegramIcon,
-  CodeIcon,
-  DatabaseIcon,
-  GlobalIcon,
-} from "@hugeicons/core-free-icons";
+import { CodeIcon } from "@hugeicons/core-free-icons";
 import Link from "next/link";
 import { Metadata } from "next";
+import { CONTACT_LINKS, SERVICES } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Contact & Services",
@@ -31,57 +24,6 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const services = [
-    {
-      title: "Custom Discord Bots",
-      description:
-        "Scalable and feature-rich bots built with JDA (Java Discord API) and Spring Boot. Integrated with databases, APIs, and more.",
-      icon: DiscordIcon,
-      tags: ["JDA", "Spring Boot", "Redis", "PostgreSQL"],
-    },
-    {
-      title: "Backend Services",
-      description:
-        "Robust and high-performance backend systems using Java Spring Boot. Custom APIs, database design (PostgreSQL), and complex logic.",
-      icon: DatabaseIcon,
-      tags: ["Java", "Spring Boot", "PostgreSQL", "Redis"],
-    },
-    {
-      title: "Fullstack Applications",
-      description:
-        "End-to-end web applications with modern technologies. Choice of Java Spring Boot or Next.js/React with TypeScript.",
-      icon: GlobalIcon,
-      tags: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-    },
-  ];
-
-  const contactLinks = [
-    {
-      name: "Email",
-      icon: Mail01Icon,
-      href: "mailto:thesmoothrere@gmail.com",
-      label: "thesmoothrere@gmail.com",
-    },
-    {
-      name: "Discord",
-      icon: DiscordIcon,
-      href: "https://discord.com/users/thesmoothrere",
-      label: "@thesmoothrere",
-    },
-    {
-      name: "Telegram",
-      icon: TelegramIcon,
-      href: "https://t.me/thesmoothrere",
-      label: "@thesmoothrere",
-    },
-    {
-      name: "GitHub",
-      icon: GithubIcon,
-      href: "https://github.com/TheSmoothRere",
-      label: "TheSmoothRere",
-    },
-  ];
-
   return (
     <div className="relative min-h-screen bg-background/50">
       <div className="container max-w-7xl mx-auto py-12 px-4 lg:py-20">
@@ -113,7 +55,7 @@ export default function ContactPage() {
                 Services
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {services.map((service) => (
+                {SERVICES.map((service) => (
                   <Card
                     key={service.title}
                     className="bg-card/30 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-colors"
@@ -211,7 +153,7 @@ export default function ContactPage() {
                     Direct Contact
                   </h3>
                   <div className="space-y-3">
-                    {contactLinks.map((link) => (
+                    {CONTACT_LINKS.map((link) => (
                       <Link
                         key={link.name}
                         href={link.href}
