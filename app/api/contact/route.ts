@@ -22,20 +22,25 @@ export async function POST(request: NextRequest) {
     if (subject.length > 250) return NextResponse.json({ error: "Subject too long" }, { status: 400 });
     if (message.length > 1000) return NextResponse.json({ error: "Message too long" }, { status: 400 });
 
-    // Rate limiting using Cloudflare Rate Limiting binding
+    // Rate limiting using Cloudflare KV
     const ip = request.headers.get("cf-connecting-ip") || "unknown";
     try {
-      const { env } = getCloudflareContext();
-      const limiter = env.MY_RATE_LIMITER as any;
+      const { env } = getCloudflareContext() as { env: { KV_RATE_LIMITER: KVNamespace } };
+      const kv = env.KV_RATE_LIMITER;
       
-      if (limiter) {
-        const { success } = await limiter.limit({ key: ip });
-        if (!success) {
+      if (kv) {
+        const key = `ratelimit:${ip}`;
+        const current = await kv.get(key);
+        
+        if (current !== null) {
           return NextResponse.json(
             { error: "Rate limit exceeded. Please try again later." }, 
             { status: 429 }
           );
         }
+        
+        // Set the key with a 60-second expiration (TTL)
+        await kv.put(key, "1", { expirationTtl: 60 });
       }
     } catch (e) {
       console.warn("Rate limiter check failed or binding missing:", e);

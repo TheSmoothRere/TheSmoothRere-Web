@@ -6,7 +6,7 @@ declare namespace Cloudflare {
 		mainModule: typeof import("./.open-next/worker");
 	}
 	interface Env {
-		MY_RATE_LIMITER: RateLimit;
+		KV_RATE_LIMITER: KVNamespace;
 		IMAGES: ImagesBinding;
 		ASSETS: Fetcher;
 		NEXTJS_ENV: string;
