@@ -1,5 +1,7 @@
 # TheSmoothRere Web
 
+![Commissions](https://img.shields.io/badge/Commissions-Open-brightgreen)
+
 Personal portfolio and blog website built with Next.js 16, React 19, and Tailwind CSS 4.
 
 ## 🚀 Features
