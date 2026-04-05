@@ -1,4 +1,3 @@
-import { getRepos } from "@/lib/github";
 import { ProjectCard } from "@/components/projects/project-card";
 import {
   Empty,
@@ -7,8 +6,18 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { getRepos } from "@/lib/github";
 import { Search01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,8 +25,24 @@ export const metadata: Metadata = {
   description: "A showcase of my open-source work, backend services, and contributions to the developer community.",
 };
 
-export default async function ProjectsPage() {
-  const repos = await getRepos();
+const REPOS_PER_PAGE = 9;
+
+export default async function ProjectsPage({
+  searchParams,
+}: Readonly<{
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}>) {
+  const resolvedSearchParams = await searchParams;
+  const page = typeof resolvedSearchParams.page === "string" ? Number(resolvedSearchParams.page) : 1;
+  const currentPage = Math.max(1, page);
+
+  const allRepos = await getRepos();
+  const totalRepos = allRepos.length;
+  const totalPages = Math.ceil(totalRepos / REPOS_PER_PAGE);
+
+  const startIndex = (currentPage - 1) * REPOS_PER_PAGE;
+  const endIndex = startIndex + REPOS_PER_PAGE;
+  const repos = allRepos.slice(startIndex, endIndex);
 
   return (
     <div className="container max-w-7xl mx-auto py-12 px-4">
@@ -50,6 +75,67 @@ export default async function ProjectsPage() {
           </div>
         )}
       </div>
+
+      {totalPages > 1 && (
+        <div className="mt-12">
+          <Pagination>
+            <PaginationContent>
+              {currentPage > 1 && (
+                <PaginationItem>
+                  <PaginationPrevious href={`/projects?page=${currentPage - 1}`} />
+                </PaginationItem>
+              )}
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
+                // Always show first and last page
+                // Show current page and one page before/after
+                if (
+                  pageNum === 1 ||
+                  pageNum === totalPages ||
+                  (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
+                ) {
+                  return (
+                    <PaginationItem key={pageNum}>
+                      <PaginationLink
+                        href={`/projects?page=${pageNum}`}
+                        isActive={currentPage === pageNum}
+                      >
+                        {pageNum}
+                      </PaginationLink>
+                    </PaginationItem>
+                  );
+                }
+
+                // Show ellipsis if page is 2 and current page is > 3
+                if (pageNum === 2 && currentPage > 3) {
+                  return (
+                    <PaginationItem key="ellipsis-start">
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                  );
+                }
+
+                // Show ellipsis if page is totalPages - 1 and current page is < totalPages - 2
+                if (pageNum === totalPages - 1 && currentPage < totalPages - 2) {
+                  return (
+                    <PaginationItem key="ellipsis-end">
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                  );
+                }
+
+                return null;
+              })}
+
+              {currentPage < totalPages && (
+                <PaginationItem>
+                  <PaginationNext href={`/projects?page=${currentPage + 1}`} />
+                </PaginationItem>
+              )}
+            </PaginationContent>
+          </Pagination>
+        </div>
+      )}
     </div>
   );
 }

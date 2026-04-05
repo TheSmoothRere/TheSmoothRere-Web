@@ -1,3 +1,5 @@
+import { MOCK_REPOS } from "./mock-repos";
+
 export interface Repo {
   id: number;
   name: string;
@@ -13,6 +15,10 @@ export interface Repo {
 }
 
 export async function getRepos(): Promise<Repo[]> {
+  if (process.env.MOCK_GITHUB === "true") {
+    return MOCK_REPOS.sort((a, b) => b.stargazers_count - a.stargazers_count);
+  }
+
   try {
     const response = await fetch(
       "https://api.github.com/users/TheSmoothRere/repos?sort=updated&per_page=100",
