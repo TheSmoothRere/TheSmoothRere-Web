@@ -1,4 +1,4 @@
-import { BlogCard } from "@/components/blog-card";
+import { BlogCard } from "@/components/blog/blog-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {

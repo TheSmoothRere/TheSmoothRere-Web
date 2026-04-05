@@ -1,5 +1,5 @@
 import { getRepos } from "@/lib/github";
-import { ProjectCard } from "@/components/project-card";
+import { ProjectCard } from "@/components/projects/project-card";
 import {
   Empty,
   EmptyDescription,

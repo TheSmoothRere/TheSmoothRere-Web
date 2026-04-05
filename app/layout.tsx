@@ -60,8 +60,8 @@ export const metadata: Metadata = {
   },
 };
 
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({

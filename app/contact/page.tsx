@@ -12,7 +12,7 @@ import { CodeIcon } from "@hugeicons/core-free-icons";
 import Link from "next/link";
 import { Metadata } from "next";
 import { CONTACT_LINKS, SERVICES } from "@/lib/constants";
-import { ContactForm } from "@/components/contact-form";
+import { ContactForm } from "@/components/contact/contact-form";
 
 export const metadata: Metadata = {
   title: "Contact & Services",

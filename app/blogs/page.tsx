@@ -1,5 +1,5 @@
 import { getPosts } from "@/lib/blog";
-import { BlogCard } from "@/components/blog-card";
+import { BlogCard } from "@/components/blog/blog-card";
 import {
   Empty,
   EmptyDescription,
