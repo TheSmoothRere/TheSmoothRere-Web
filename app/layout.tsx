@@ -55,6 +55,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  verification: {
+    google: "zqzi27zYhYbN0zPmydqRVTiYHFYeud8BgUQ7o8Kn2vM",
+  },
 };
 
 import { Header } from "@/components/header";

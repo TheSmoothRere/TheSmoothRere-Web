@@ -1,44 +1,54 @@
-import { NextRequest, NextResponse } from "next/server";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { NextRequest, NextResponse } from "next/server";
 
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
 
+interface ContactForm {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, subject, message } = (await request.json()) as {
-      name?: string;
-      email?: string;
-      subject?: string;
-      message?: string;
-    };
+    const body: ContactForm = await request.json();
+    const { name, email, subject, message } = body;
 
     if (!name || !email || !subject || !message) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+      return NextResponse.json(
+        { error: "All fields are required" },
+        { status: 400 },
+      );
     }
 
     // Character limit validation
-    if (name.length > 100) return NextResponse.json({ error: "Name too long" }, { status: 400 });
-    if (email.length > 100) return NextResponse.json({ error: "Email too long" }, { status: 400 });
-    if (subject.length > 250) return NextResponse.json({ error: "Subject too long" }, { status: 400 });
-    if (message.length > 1000) return NextResponse.json({ error: "Message too long" }, { status: 400 });
+    if (name.length > 100)
+      return NextResponse.json({ error: "Name too long" }, { status: 400 });
+    if (email.length > 100)
+      return NextResponse.json({ error: "Email too long" }, { status: 400 });
+    if (subject.length > 250)
+      return NextResponse.json({ error: "Subject too long" }, { status: 400 });
+    if (message.length > 1000)
+      return NextResponse.json({ error: "Message too long" }, { status: 400 });
 
     // Rate limiting using Cloudflare KV
     const ip = request.headers.get("cf-connecting-ip") || "unknown";
     try {
-      const { env } = getCloudflareContext() as { env: { KV_RATE_LIMITER: KVNamespace } };
+      const { env } = getCloudflareContext();
       const kv = env.KV_RATE_LIMITER;
-      
+
       if (kv) {
         const key = `ratelimit:${ip}`;
         const current = await kv.get(key);
-        
+
         if (current !== null) {
           return NextResponse.json(
-            { error: "Rate limit exceeded. Please try again later." }, 
-            { status: 429 }
+            { error: "Rate limit exceeded. Please try again later." },
+            { status: 429 },
           );
         }
-        
+
         // Set the key with a 60-second expiration (TTL)
         await kv.put(key, "1", { expirationTtl: 60 });
       }
@@ -47,7 +57,10 @@ export async function POST(request: NextRequest) {
     }
 
     if (!DISCORD_WEBHOOK_URL) {
-      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Server configuration error" },
+        { status: 500 },
+      );
     }
 
     const payload = {
@@ -79,6 +92,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Message sent successfully!" });
   } catch (error) {
     console.error("Contact API Error:", error);
-    return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to send message" },
+      { status: 500 },
+    );
   }
 }
