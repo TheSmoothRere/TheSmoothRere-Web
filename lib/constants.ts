@@ -80,13 +80,6 @@ export const CONTACT_LINKS = [
     onFooter: true,
   },
   {
-    name: "Facebook",
-    icon: Facebook01Icon,
-    href: "https://www.facebook.com/61576495942050",
-    label: "TheSmoothRere",
-    onFooter: true,
-  },
-  {
     name: "Ko-fi",
     icon: Coffee01Icon,
     href: "https://ko-fi.com/thesmoothrere",
