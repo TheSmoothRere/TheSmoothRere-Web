@@ -8,7 +8,10 @@ import {
   InstagramIcon,
   Linkedin01Icon,
   Mail01Icon,
+  PaypalIcon,
+  BirdIcon,
   TelegramIcon,
+  ThreadsIcon,
   TiktokIcon,
 } from "@hugeicons/core-free-icons";
 
@@ -49,6 +52,20 @@ export const CONTACT_LINKS = [
     onFooter: true,
   },
   {
+    name: "X / Twitter",
+    icon: BirdIcon,
+    href: "https://x.com/thesmoothrere",
+    label: "@thesmoothrere",
+    onFooter: true,
+  },
+  {
+    name: "Threads",
+    icon: ThreadsIcon,
+    href: "https://www.threads.net/@thesmoothrere",
+    label: "@thesmoothrere",
+    onFooter: true,
+  },
+  {
     name: "Instagram",
     icon: InstagramIcon,
     href: "https://www.instagram.com/thesmoothrere",
@@ -74,6 +91,13 @@ export const CONTACT_LINKS = [
     icon: Coffee01Icon,
     href: "https://ko-fi.com/thesmoothrere",
     label: "Support me on Ko-fi",
+    onFooter: true,
+  },
+  {
+    name: "PayPal",
+    icon: PaypalIcon,
+    href: "http://paypal.me/thesmoothrere",
+    label: "Support me via PayPal",
     onFooter: true,
   },
 ];
